@@ -6,6 +6,16 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
 import { AwsVpcCreatorStackProps } from './AwsVpcCreatorStackProps';
 
+/**
+ * The AwsVpcCreatorStack class is responsible for creating a VPC and its related resources
+ * within AWS using the AWS CDK. It sets up a VPC with public and private subnets, configures
+ * NAT gateways for high availability, and establishes logging for VPC flow logs.
+ *
+ * @param {Construct} scope - The scope in which to define this construct.
+ * @param {string} id - The scoped construct ID.
+ * @param {AwsVpcCreatorStackProps} props - The stack properties including resource prefix,
+ *                                          application name, and environment settings.
+ */
 export class AwsVpcCreatorStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: AwsVpcCreatorStackProps) {
     super(scope, id, props);
