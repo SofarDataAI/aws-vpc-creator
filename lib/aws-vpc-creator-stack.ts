@@ -29,8 +29,8 @@ export class AwsVpcCreatorStack extends cdk.Stack {
                     cidrMask: 24, //IPs in Range - 256
                 },
             ],
-            enableDnsHostnames: true,
-            enableDnsSupport: true,
+            enableDnsHostnames: props.enableDnsHostnames,
+            enableDnsSupport: props.enableDnsSupport,
     });
 
     // apply removal policy to all vpc and subnet resources
