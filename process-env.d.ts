@@ -6,5 +6,6 @@ declare module NodeJS {
         APP_NAME: string;
         ENABLE_DNS_HOSTNAMES: string;
         ENABLE_DNS_SUPPORT: string;
+        OWNER: string;
     }
 }
