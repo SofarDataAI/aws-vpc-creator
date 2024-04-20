@@ -1,3 +1,15 @@
+## 2024-04-20
+
+### Added
+- Added imports for `Aspects`, `ApplyTags`, and `AwsSolutionsChecks` in `bin/aws-vpc-creator.ts`.
+- Added `owner` variable and applied tags to all resources using `appAspects` in `bin/aws-vpc-creator.ts`.
+- Updated `vpcFlowLogRole` in `lib/aws-vpc-creator-stack.ts` to use inline policies instead of managed policies.
+- Added inline policy `VpcFlowLogsPolicy` to allow `logs:CreateLogStream` and `logs:PutLogEvents` actions on the VPC flow log group in `lib/aws-vpc-creator-stack.ts`.
+- Added `OWNER` environment variable declaration in `process-env.d.ts`.
+- Added `ApplyTags` class for applying tags to resources in `utils/apply-tag.ts`.
+- Added `OWNER` environment variable to `.env.example`.
+- Updated `aws-cdk-lib` and `cdk-nag` versions in `package-lock.json` and `package.json`.
+
 ## 2024-04-14
 
 ### Added
