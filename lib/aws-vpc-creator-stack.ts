@@ -57,9 +57,18 @@ export class AwsVpcCreatorStack extends cdk.Stack {
 
     const vpcFlowLogRole = new iam.Role(this, `${props.resourcePrefix}-RoleVpcFlowLogs`, {
         assumedBy: new iam.ServicePrincipal("vpc-flow-logs.amazonaws.com"),
-        managedPolicies: [
-            iam.ManagedPolicy.fromAwsManagedPolicyName("CloudWatchFullAccess"),
-        ],
+        inlinePolicies: {
+            'VpcFlowLogsPolicy': new iam.PolicyDocument({
+                statements: [
+                    new iam.PolicyStatement({
+                        actions: ['logs:CreateLogStream', 'logs:PutLogEvents'],
+                        resources: [
+                            `arn:aws:logs:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:log-group:${props.resourcePrefix}-VpcFlowLogGroup`,
+                        ],
+                    }),
+                ],
+            }),
+        },
     });
 
     const vpcFlowLogGroup = new logs.LogGroup(this, `${props.resourcePrefix}-VpcFlowLogGroup`, {
