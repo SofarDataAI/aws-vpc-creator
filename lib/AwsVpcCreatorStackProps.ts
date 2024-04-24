@@ -25,4 +25,20 @@ export interface AwsVpcCreatorStackProps extends StackProps {
      * Enable DNS support in the VPC.
      */
     readonly enableDnsSupport: boolean;
+    /**
+     * The type of VPC subnet to create.
+     */
+    readonly vpcSubnetType: string;
+    /**
+     * The CIDR block for the VPC.
+     */
+    readonly vpcCidrBlock: string;
+    /**
+     * The maximum number of availability zones for the VPC.
+     */
+    readonly vpcMaxAzs: number;
+    /**
+     * The number of NAT gateways to create for the VPC.
+     */
+    readonly vpcNatGateways: number;
 }

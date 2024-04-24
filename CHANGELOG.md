@@ -1,3 +1,12 @@
+## 2024-04-24
+
+### Added
+- Added environment variables `VPC_SUBNET_TYPE`, `VPC_CIDR_BLOCK`, `VPC_MAX_AZS`, and `VPC_NAT_GATEWAYS` to configure the VPC in the `AwsVpcCreatorStack` class.
+- Updated the `checkEnvVariables` function to include the new environment variables.
+- Updated the `AwsVpcCreatorStackProps` interface to include new properties for VPC configuration.
+- Updated the `AwsVpcCreatorStack` constructor to use the new environment variables for VPC configuration.
+- Added `parseVpcSubnetType` function to parse VPC subnet type string in `vpc-type-parser.ts`.
+
 ## 2024-04-20
 
 ### Added

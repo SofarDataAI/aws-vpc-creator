@@ -5,6 +5,7 @@ import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
 import { AwsVpcCreatorStackProps } from './AwsVpcCreatorStackProps';
+import { parseVpcSubnetType } from '../utils/vpc-type-parser';
 
 /**
  * The AwsVpcCreatorStack class is responsible for creating a VPC and its related resources
@@ -21,12 +22,13 @@ export class AwsVpcCreatorStack extends cdk.Stack {
     super(scope, id, props);
 
     const removalPolicy = props.cdkDeployEnvironment === 'production' ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY;
+    const vpcSubnetType = parseVpcSubnetType(props.vpcSubnetType);
     // create vpc
     const vpcName = `${props.resourcePrefix}-VPC`;
     const awsVpc = new ec2.Vpc(this, vpcName, {
-            ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'), //IPs in Range - 65,536
-            natGateways: 3, // for high availability
-            maxAzs: 3, // for high availability
+            ipAddresses: ec2.IpAddresses.cidr(props.vpcCidrBlock), // IPs in Range - 65,536
+            natGateways: props.vpcNatGateways,
+            maxAzs: props.vpcMaxAzs,
             subnetConfiguration: [
                 {
                     name: `${props.resourcePrefix}-PUBLIC`,
@@ -34,9 +36,9 @@ export class AwsVpcCreatorStack extends cdk.Stack {
                     cidrMask: 24, //IPs in Range - 256
                 },
                 {
-                    name: `${props.resourcePrefix}-PRIVATE_WITH_EGRESS`,
-                    subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
-                    cidrMask: 24, //IPs in Range - 256
+                    name: `${props.resourcePrefix}-${props.vpcSubnetType}`,
+                    subnetType: vpcSubnetType,
+                    cidrMask: 24, // IPs in Range - 256
                 },
             ],
             enableDnsHostnames: props.enableDnsHostnames,
