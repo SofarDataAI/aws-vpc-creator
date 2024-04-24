@@ -19,7 +19,11 @@ checkEnvVariables('APP_NAME',
     'CDK_DEPLOY_REGION',
     'ENABLE_DNS_HOSTNAMES',
     'ENABLE_DNS_SUPPORT',
-    'OWNER'
+    'OWNER',
+    'VPC_SUBNET_TYPE',
+    'VPC_CIDR_BLOCK',
+    'VPC_MAX_AZS',
+    'VPC_NAT_GATEWAYS',
 );
 
 const appName = process.env.APP_NAME!;
@@ -50,6 +54,10 @@ new AwsVpcCreatorStack(app, `${appName}-${deployRegion}-${deployEnvironment}-Aws
   },
   enableDnsHostnames,
   enableDnsSupport,
+  vpcSubnetType: process.env.VPC_SUBNET_TYPE!,
+  vpcCidrBlock: process.env.VPC_CIDR_BLOCK!,
+  vpcMaxAzs: parseInt(process.env.VPC_MAX_AZS!),
+  vpcNatGateways: parseInt(process.env.VPC_NAT_GATEWAYS!),
   appName,
   description: `${appName}-${deployRegion}-${deployEnvironment}-AwsVpcCreatorStack`,
   stackName: `${appName}-${deployRegion}-${deployEnvironment}-AwsVpcCreatorStack`,
