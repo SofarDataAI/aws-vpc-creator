@@ -1,6 +1,6 @@
 {
   "name": "aws-vpc-creator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "bin": {
     "aws-vpc-creator": "bin/aws-vpc-creator.js"
   },
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.138.0",
-    "cdk-nag": "^2.28.94",
+    "cdk-nag": "^2.28.98",
     "constructs": "^10.3.0",
     "dotenv": "^16.4.5",
     "source-map-support": "^0.5.21"
